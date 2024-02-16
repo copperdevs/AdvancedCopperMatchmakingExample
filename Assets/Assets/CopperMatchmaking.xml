@@ -1,0 +1,313 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>CopperMatchmaking</name>
+    </assembly>
+    <members>
+        <member name="T:CopperMatchmaking.Client.IClientHandler">
+            <summary>
+            Interface for clients to handle hosting and joining lobbies.
+            </summary>
+        </member>
+        <member name="M:CopperMatchmaking.Client.IClientHandler.ClientRequestedToHost">
+            <summary>
+            Method for getting the join code of a lobby the client
+            </summary>
+            <returns>Lobby join code</returns>
+        </member>
+        <member name="M:CopperMatchmaking.Client.IClientHandler.JoinServer(System.UInt64)">
+            <summary>
+            Method for joining a server from a join code
+            </summary>
+            <param name="serverJoinCode">Lobby join code</param>
+        </member>
+        <member name="M:CopperMatchmaking.Client.IClientHandler.Disconnected(Riptide.DisconnectReason)">
+            <summary>
+            Method ran when disconnected from the server
+            </summary>
+        </member>
+        <member name="T:CopperMatchmaking.Client.MatchmakerClient">
+            <summary>
+            Matchmaker client for connecting to the matchmaker with
+            </summary>
+        </member>
+        <member name="P:CopperMatchmaking.Client.MatchmakerClient.ShouldUpdate">
+            <summary>
+            Enabled when <see cref="M:CopperMatchmaking.Client.MatchmakerClient.Update"/> needs to be ran to update the client.
+            </summary>
+        </member>
+        <member name="M:CopperMatchmaking.Client.MatchmakerClient.#ctor(System.String,CopperMatchmaking.Client.IClientHandler,System.Byte,System.UInt64)">
+            <summary>
+            Base constructor
+            </summary>
+            <param name="ip">Target ip of the matchmaker server</param>
+            <param name="clientHandler">Handler for the client</param>
+            <param name="rankId">Id of the clients rank</param>
+            <param name="playerId">Player id (SteamId for example)</param>
+        </member>
+        <member name="M:CopperMatchmaking.Client.MatchmakerClient.Update">
+            <summary>
+            Method to run often to update the client
+            </summary>
+        </member>
+        <member name="T:CopperMatchmaking.Data.ConnectedClient">
+            <summary>
+            Data for all connected clients
+            </summary>
+        </member>
+        <member name="F:CopperMatchmaking.Data.ConnectedClient.Rank">
+            <summary>
+            Clients rank
+            </summary>
+        </member>
+        <member name="F:CopperMatchmaking.Data.ConnectedClient.ConnectionId">
+            <summary>
+            Riptides ConnectionId  
+            </summary>
+        </member>
+        <member name="F:CopperMatchmaking.Data.ConnectedClient.RiptideConnection">
+            <summary>
+            Riptide Connection
+            </summary>
+        </member>
+        <member name="F:CopperMatchmaking.Data.ConnectedClient.PlayerId">
+            <summary>
+            Player Id sent from the client 
+            </summary>
+        </member>
+        <member name="M:CopperMatchmaking.Data.ConnectedClient.op_Implicit(CopperMatchmaking.Data.ConnectedClient)~CopperMatchmaking.Data.Rank">
+            <summary>
+            Get a clients rank
+            </summary>
+            <param name="client">Target client</param>
+            <returns>Clients rank</returns>
+        </member>
+        <member name="M:CopperMatchmaking.Data.ConnectedClient.op_Implicit(CopperMatchmaking.Data.ConnectedClient)~System.UInt32">
+            <summary>
+            Get a clients riptide connection id
+            </summary>
+            <param name="client">Target client</param>
+            <returns>Clients riptide connection id</returns>
+        </member>
+        <member name="M:CopperMatchmaking.Data.ConnectedClient.op_Implicit(CopperMatchmaking.Data.ConnectedClient)~Riptide.Connection">
+            <summary>
+            Get a clients riptide connect
+            </summary>
+            <param name="client">Target client</param>
+            <returns>Clients riptide connection</returns>
+        </member>
+        <member name="T:CopperMatchmaking.Data.Rank">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:CopperMatchmaking.Data.Rank.DisplayName">
+            <summary>
+            Display name of the rank for visual sakes
+            </summary>
+        </member>
+        <member name="F:CopperMatchmaking.Data.Rank.Id">
+            <summary>
+            Rank id of a client
+            </summary>
+        </member>
+        <member name="M:CopperMatchmaking.Data.Rank.#ctor(System.String,System.Enum)">
+            <summary>
+            Creates a new rank id with an enum
+            </summary>
+            <param name="displayName">Display name of the rank</param>
+            <param name="id">Enum id of the rank (Case to byte)</param>
+        </member>
+        <member name="M:CopperMatchmaking.Data.Rank.#ctor(System.String,System.Byte)">
+            <summary>
+            Creates a new rank id with a byte
+            </summary>
+            <param name="displayName">Display name of the rank</param>
+            <param name="id">Byte id of the rank</param>
+        </member>
+        <member name="M:CopperMatchmaking.Data.Rank.op_Implicit(CopperMatchmaking.Data.Rank)~System.Byte">
+            <summary>
+            Gets the id of a rank
+            </summary>
+            <param name="rank">Target Rank</param>
+            <returns>Byte id of the rank</returns>
+        </member>
+        <member name="M:CopperMatchmaking.Data.Rank.Serialize(Riptide.Message)">
+            <summary>
+            Serializes the rank for riptide purposes
+            </summary>
+            <param name="message">Target message</param>
+        </member>
+        <member name="M:CopperMatchmaking.Data.Rank.Deserialize(Riptide.Message)">
+            <summary>
+            Deserializes the rank for riptide purposes
+            </summary>
+            <param name="message">Target message</param>
+        </member>
+        <member name="T:CopperMatchmaking.Info.Log">
+            <summary>
+            Log class 
+            </summary>
+        </member>
+        <member name="M:CopperMatchmaking.Info.Log.Info(System.Object)">
+            <summary>
+            Logs an info message to the console
+            </summary>
+            <param name="message">Message to log</param>
+        </member>
+        <member name="M:CopperMatchmaking.Info.Log.Warning(System.Object)">
+            <summary>
+            Logs an warning message to the console
+            </summary>
+            <param name="message">Message to log</param>
+        </member>
+        <member name="M:CopperMatchmaking.Info.Log.Error(System.Object)">
+            <summary>
+            Logs an error message to the console
+            </summary>
+            <param name="message">Message to log</param>
+        </member>
+        <member name="M:CopperMatchmaking.Info.Log.Error(System.Exception)">
+            <summary>
+            Logs an exception to the console
+            </summary>
+            <param name="e">Error to log</param>
+        </member>
+        <member name="M:CopperMatchmaking.Info.Log.Assert(System.Boolean,System.Object)">
+            <summary>
+            Checks for a condition, and if false logs the message
+            </summary>
+            <param name="condition">Condition to check</param>
+            <param name="message">Message to log</param>
+        </member>
+        <member name="T:CopperMatchmaking.Info.CopperLogger">
+            <summary>
+            Main logger class
+            </summary>
+        </member>
+        <member name="T:CopperMatchmaking.Info.CopperLogger.BaseLog">
+            <summary>
+            Log action
+            </summary>
+        </member>
+        <member name="M:CopperMatchmaking.Info.CopperLogger.Initialize(System.Boolean)">
+            <summary>
+            Initialize logger with internal log functions
+            </summary>
+            <param name="timestamps">Log messages with timestamp</param>
+        </member>
+        <member name="M:CopperMatchmaking.Info.CopperLogger.Initialize(CopperMatchmaking.Info.CopperLogger.BaseLog,CopperMatchmaking.Info.CopperLogger.BaseLog,CopperMatchmaking.Info.CopperLogger.BaseLog,System.Boolean)">
+            <summary>
+            Initialize logger with custom log functions
+            </summary>
+            <param name="infoLog"></param>
+            <param name="warningLog"></param>
+            <param name="errorLog"></param>
+            <param name="timestamps">Log messages with timestamp</param>
+        </member>
+        <member name="M:CopperMatchmaking.Info.CopperLogger.LogInfo(System.Object)">
+            <summary>
+            Uses log action to log a message
+            </summary>
+            <param name="message"></param>
+        </member>
+        <member name="M:CopperMatchmaking.Info.CopperLogger.LogWarning(System.Object)">
+            <summary>
+            Uses warning log action to log a message
+            </summary>
+            <param name="message"></param>
+        </member>
+        <member name="M:CopperMatchmaking.Info.CopperLogger.LogError(System.Object)">
+            <summary>
+            Uses error log action to log a message
+            </summary>
+            <param name="message"></param>
+        </member>
+        <member name="M:CopperMatchmaking.Info.CopperLogger.InternalLogInfo(System.Object)">
+            <summary>
+            Base internal info log
+            </summary>
+            <param name="message"></param>
+        </member>
+        <member name="M:CopperMatchmaking.Info.CopperLogger.InternalLogWarning(System.Object)">
+            <summary>
+            Base internal warning log
+            </summary>
+            <param name="message"></param>
+        </member>
+        <member name="M:CopperMatchmaking.Info.CopperLogger.InternalLogError(System.Object)">
+            <summary>
+            Base internal error
+            </summary>
+            <param name="message"></param>
+        </member>
+        <member name="T:CopperMatchmaking.Server.BasicServerHandler">
+            <summary>
+            Base built in server handler
+            </summary>
+        </member>
+        <member name="M:CopperMatchmaking.Server.BasicServerHandler.VerifyPlayer(CopperMatchmaking.Data.ConnectedClient)">
+            <summary>
+            Verify if a client should be allowed to connect
+            </summary>
+            <param name="client">Target client to connect</param>
+            <returns>True if client is allowed to connect</returns>
+        </member>
+        <member name="T:CopperMatchmaking.Server.IServerHandler">
+            <summary>
+            Server handler interface handler
+            </summary>
+        </member>
+        <member name="M:CopperMatchmaking.Server.IServerHandler.VerifyPlayer(CopperMatchmaking.Data.ConnectedClient)">
+            <summary>
+            Server side verification
+            </summary>
+            <param name="client">Target client to verify</param>
+            <returns>True if client is verified and allowed to connect</returns>
+        </member>
+        <member name="T:CopperMatchmaking.Server.MatchmakerServer">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:CopperMatchmaking.Server.MatchmakerServer.#ctor(System.Byte,System.UInt16)">
+            <summary>
+            Base Constructor with a pre-made ServerHandler
+            </summary>
+            <param name="lobbySize">Size of a lobby. Must be an even number</param>
+            <param name="maxClients">Max amount of clients that can connect to the matchmaking server</param>
+        </member>
+        <member name="M:CopperMatchmaking.Server.MatchmakerServer.#ctor(CopperMatchmaking.Server.IServerHandler,System.Byte,System.UInt16)">
+            <summary>
+            Base Constructor
+            </summary>
+            <param name="handler">Server handler</param>
+            <param name="lobbySize">Size of a lobby. Must be an even number</param>
+            <param name="maxClients">Max amount of clients that can connect to the matchmaking server</param>
+        </member>
+        <member name="M:CopperMatchmaking.Server.MatchmakerServer.Update">
+            <summary>
+            Method to run often to update the server
+            </summary>
+        </member>
+        <member name="M:CopperMatchmaking.Server.MatchmakerServer.RegisterRanks(CopperMatchmaking.Data.Rank[])">
+            <summary>
+            
+            </summary>
+            <param name="targetRanks">Ranks to register</param>
+        </member>
+        <member name="T:CopperMatchmaking.Util.Extensions">
+            <summary>
+            Extensions
+            </summary>
+        </member>
+        <member name="M:CopperMatchmaking.Util.Extensions.GetConnection(Riptide.Server,System.UInt16)">
+            <summary>
+            Attempt to get a riptide connection from a server with its connection id
+            </summary>
+            <param name="server">Target server to get the connection from</param>
+            <param name="id">Connection id</param>
+            <returns>Riptide connection</returns>
+        </member>
+    </members>
+</doc>
