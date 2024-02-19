@@ -7,13 +7,13 @@ namespace CopperMatchmaking.Example.Client
 {
     public class PlayerClientHandler : IClientHandler
     {
-        public ulong ClientRequestedToHost()
+        public string ClientRequestedToHost()
         {
             ClientNetworkingManager.Instance.StartHost();
             return ClientNetworkingManager.Instance.GetCurrentJoinCode();
         }
 
-        public void JoinServer(ulong serverJoinCode)
+        public void JoinServer(string serverJoinCode)
         {
             ClientNetworkingManager.Instance.StartClient(serverJoinCode);   
         }

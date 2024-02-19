@@ -8,6 +8,7 @@ namespace CopperStudios.Tools
     {
         [SerializeField] private string targetScene;
         [SerializeField] private float delay;
+        [SerializeField] private LoadSceneMode loadMode = LoadSceneMode.Single;
 
 
         private void Start()
@@ -17,7 +18,7 @@ namespace CopperStudios.Tools
 
         private void LoadScene()
         {
-            SceneManager.LoadScene(targetScene);
+            SceneManager.LoadScene(targetScene, loadMode);
         }
     }
 }

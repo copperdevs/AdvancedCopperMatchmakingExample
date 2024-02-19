@@ -1,18 +1,27 @@
+using System;
+using System.Globalization;
+using CopperMatchmaking.Info;
 using CopperStudios.Tools;
 using Mirror;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Code.Networking
 {
     public class ClientNetworkingManager : SingletonMonoBehaviour<ClientNetworkingManager>
     {
         [SerializeField] private NetworkManager manager;
-        [SerializeField] private ulong currentJoinCode;
+        [SerializeField] private string currentJoinCode;
 
         private bool isHost;
         private bool isClient;
 
-        public ulong GetCurrentJoinCode() => currentJoinCode;
+        public string GetCurrentJoinCode() => currentJoinCode;
+
+        private void Start()
+        {
+            CopperLogger.Initialize(Debug.Log, Debug.LogWarning, Debug.LogError);
+        }
 
         public void StartHost()
         {
@@ -21,14 +30,14 @@ namespace Code.Networking
             manager.StartHost();
             isHost = true;
 
-            currentJoinCode = StartSteamLobby();
+            currentJoinCode = manager.networkAddress;
         }
 
-        public void StartClient(ulong code)
+        public void StartClient(string code)
         {
             StopNetworking();
 
-            manager.networkAddress = code.ToString();
+            manager.networkAddress = code;
             manager.StartClient();
             isClient = true;
         }
@@ -42,9 +51,9 @@ namespace Code.Networking
         }
 
         // TODO: Implement creating a steam lobby and returning the lobby join code
-        public ulong StartSteamLobby()
+        public string StartSteamLobby()
         {
-            return (ulong)Random.Range(0, 1000000000000);
+            return $"{Random.Range(0, 1000000000000)}";
         }
     }
 }

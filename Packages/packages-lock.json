@@ -1,5 +1,12 @@
 {
   "dependencies": {
+    "com.copperdevs.matchmaking": {
+      "version": "https://github.com/copperdevs/CopperMatchmaking.git?path=/unity",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "f50dfc2c91f3ead997f3b5bdebc0088f968e163c"
+    },
     "com.mirror.steamworks.net": {
       "version": "https://github.com/Chykary/FizzySteamworks.git?path=/com.mirror.steamworks.net",
       "depth": 0,
@@ -286,6 +293,13 @@
         "com.unity.modules.jsonserialize": "1.0.0"
       },
       "url": "https://packages.unity.com"
+    },
+    "net.tomweiland.riptide": {
+      "version": "https://github.com/RiptideNetworking/Riptide.git?path=/Packages/Core#2.2.0",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "3282893aa754784596b5978b64227844ed02bc50"
     },
     "com.unity.modules.ai": {
       "version": "1.0.0",
